@@ -7,10 +7,16 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "anonymous-files": "^1.0.1",
+    "axios": "^0.24.0",
     "expo": "~43.0.0",
-    "expo-splash-screen": "~0.13.3",
+    "expo-image-picker": "~11.0.3",
+    "expo-sharing": "~10.0.3",
+    "expo-splash-screen": "~0.13.5",
     "expo-status-bar": "~1.1.0",
-    "expo-updates": "~0.10.5",
+    "expo-updates": "~0.10.12",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.2",

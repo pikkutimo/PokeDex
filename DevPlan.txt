@@ -1,0 +1,29 @@
+ONGELMIA:
+    - kehittäminen WSL2:ssa vaatii tunnelin käyttöä
+    - kokeiltu wsl host patcheriä
+        https://github.com/CzBiX/WSLHostPatcher
+        En saanut toimimaan!
+    - Cannot connect to Metro
+        Yhteys häviää säännöllisesti
+        => refresh palauttaa
+1. API 
+    Pokémon TCG Developer Portal
+    Rekisteröity => API-key
+2. Paikallinen testiversio db:stä
+    Asensin json-serverin ja leikkasin pienen palan api vastauksesta db.json-tiedostoon
+    AJA: npx json-server --watch db.json -p 3001
+    Onko se react-native apin käytettävissä?
+    Ei suoraan
+    RATKAISU ==> käytä localtunnel https://github.com/localtunnel/localtunnel
+                ==> Aja json-serveriä json-server --port 8000 ./db.json --watch
+                ==> Käynnistä localtunnel  lt --port 8000
+                ==> Tarjoilee sinulle http-osoitteen, jota käyttää koodissa esimerkiksi https://dangerous-treefrog-84.loca.lt
+3. Poista turhia kilkkeitä
+4. Miten ajaa kehitysversiota kaikilla näillä kilkkeillä (json-server, localtunnel, expo)
+5. SOVELLUS: 
+    - listaa kaikki kortit etusivulla
+
+15/11/2021
+
+-Navigaation lisääminen sovelluskseen
+ => react navigation
