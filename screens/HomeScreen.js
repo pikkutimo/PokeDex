@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, FlatList, StyleSheet, Text, TouchableOpacity, Modal, Alert } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text, TouchableOpacity, Modal, Alert, Image } from 'react-native';
 import axios from 'axios';
 
 
@@ -18,11 +18,12 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 function HomeScreen({ navigation }) {
   const [cards, setCards] = React.useState([]);
   const [selectedId, setSelectedId] = React.useState(null);
+  const [selectedCard, setSelectedCard] = React.useState({});
   const [modalVisible, setModalVisible] = React.useState(false);
 
   React.useEffect(() => {
     axios
-      .get('https://quiet-ladybug-16.loca.lt/data')
+      .get('https://odd-wombat-53.loca.lt/data')
       .then(response => {
         // handle success
         setCards(response.data)
@@ -43,7 +44,9 @@ function HomeScreen({ navigation }) {
         item={item}
         onPress={() => {
           setSelectedId(item.id);
-          setModalVisible(true)
+          setSelectedCard(item.images.small);
+          console.log(selectedCard)
+          setModalVisible(true);
         }}
         backgroundColor={{ backgroundColor }}
         textColor={{ color }}
@@ -66,7 +69,11 @@ function HomeScreen({ navigation }) {
           setModalVisible(!modalVisible);
         }}
       >
-        <Text style={styles.modalView}>Helurei</Text>
+        <Image
+          style={{ paddingLeft: 30, width: '100%', height: '100%', resizeMode: 'contain'}}
+          source={{
+            uri: `${selectedCard}`
+          }} />
       </Modal>
     </SafeAreaView>
   );
@@ -82,21 +89,6 @@ const styles = StyleSheet.create({
       padding: 20,
       marginVertical: 8,
       marginHorizontal: 16,
-    },
-    modalView: {
-      margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
     },
     title: {
       fontSize: 32,
