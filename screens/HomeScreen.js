@@ -1,21 +1,27 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, FlatList, StyleSheet, Text, View, Button } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
 
-const Item = ({ name }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{name}</Text>
-    </View>
-  );
+// const Item = ({ name }) => (
+//     <View style={styles.item}>
+//       <Text style={styles.title}>{name}</Text>
+//     </View>
+//   );
+const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+    <Text style={[styles.title, textColor]}>{item.name}</Text>
+  </TouchableOpacity>
+);
 
 function HomeScreen({ navigation }) {
-    const [cards, setCards] = React.useState([]);  
+  const [cards, setCards] = React.useState([]);
+  const [selectedId, setSelectedId] = React.useState(null); 
 
   React.useEffect(() => {
     axios
-      .get('https://neat-snail-3.loca.lt/data')
+      .get('https://quiet-ladybug-16.loca.lt/data')
       .then(response => {
         // handle success
         setCards(response.data)
@@ -27,7 +33,19 @@ function HomeScreen({ navigation }) {
       });
   }, []);
 
-  const renderItem = ({ item }) => <Item name={item.name} />;
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const color = item.id === selectedId ? 'white' : 'black';
+
+    return (
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
