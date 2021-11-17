@@ -6,7 +6,6 @@ import * as Sharing from 'expo-sharing';
 import uploadToAnonymousFilesAsync from 'anonymous-files';
 import * as SplashScreen from 'expo-splash-screen';
 import axios from 'axios';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 
 const Item = ({ name }) => (

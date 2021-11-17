@@ -27,3 +27,8 @@ ONGELMIA:
 
 -Navigaation lisääminen sovelluskseen
  => react navigation
+
+17/11/2021
+
+- Axios käyttää vastauksessa data-nimikettä ilmoittamaan serverin vastauksen
+    ==> asetettaessa kortteja. muista käyttää setCards(data.data)
