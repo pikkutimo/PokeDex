@@ -32,3 +32,9 @@ ONGELMIA:
 
 - Axios käyttää vastauksessa data-nimikettä ilmoittamaan serverin vastauksen
     ==> asetettaessa kortteja. muista käyttää setCards(data.data)
+
+18//11/2021
+
+- Otetaan redux-käyttöön tilan hallintaan.
+    => Ensin kortit
+    - MUISTA! Axios ei vielä hae kuin yhden sivun korteista

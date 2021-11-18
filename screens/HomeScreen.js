@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadCollection } from '../redux/collectionSlice';
 import { SafeAreaView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
@@ -11,16 +13,18 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 function HomeScreen({ navigation }) {
-  const [cards, setCards] = React.useState([]);
+  // const [cards, setCards] = React.useState([]);
+  const cards = useSelector(state => state.collection.cardList);
+  const dispatch = useDispatch();
   const [selectedId, setSelectedId] = React.useState(null);
 
   React.useEffect(() => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://curly-rabbit-53.loca.lt/data')
+        .get('https://dangerous-monkey-61.loca.lt/data')
 
-        setCards(data)
+        dispatch(loadCollection(data))
         console.log('Cards fetched')
       } catch (error) {
         console.log(error);
