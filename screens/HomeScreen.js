@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.name}</Text>
+    <Text style={[styles.title, textColor]}>{item.hp}{item.supertype}{item.name}</Text>
   </TouchableOpacity>
 );
 
@@ -22,7 +22,7 @@ function HomeScreen({ navigation }) {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://dangerous-monkey-61.loca.lt/data')
+        .get('https://foolish-horse-74.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')

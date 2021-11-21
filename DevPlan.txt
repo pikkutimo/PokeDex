@@ -38,3 +38,4 @@ ONGELMIA:
 - Otetaan redux-käyttöön tilan hallintaan.
     => Ensin kortit
     - MUISTA! Axios ei vielä hae kuin yhden sivun korteista
+- Luo komponentti listassa näytettäville korteille
