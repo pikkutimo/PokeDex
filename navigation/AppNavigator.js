@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,9 +14,33 @@ const Stack = createNativeStackNavigator();
 const HomeTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Pokemons' component={HomeScreen} />
-      <Tab.Screen name='Decks' component={DeckScreen} />
-      <Tab.Screen name='About' component={AboutScreen} />
+      <Tab.Screen 
+      name='Pokemons'
+      component={HomeScreen} 
+      options= {{
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="home" size={24} color='#3b4cca' />
+        ),
+      }}
+      />
+      <Tab.Screen 
+      name='Decks' 
+      component={DeckScreen}
+      options= {{
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="wallet" size={24} color='#3b4cca' />
+        ),
+      }}
+      />
+      <Tab.Screen
+      name='About'
+      component={AboutScreen}
+      options= {{
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="info" size={24} color='#3b4cca' />
+          ),
+      }}
+      />
     </Tab.Navigator>
   )
 }

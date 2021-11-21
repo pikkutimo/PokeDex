@@ -2,15 +2,11 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCollection } from '../redux/collectionSlice';
-import { SafeAreaView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import SingleCard  from '../components/SingleCard';
+import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { useFonts, Inter_300Light } from '@expo-google-fonts/inter';
 import axios from 'axios';
 
-
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.hp}{item.supertype}{item.name}</Text>
-  </TouchableOpacity>
-);
 
 function HomeScreen({ navigation }) {
   // const [cards, setCards] = React.useState([]);
@@ -22,7 +18,7 @@ function HomeScreen({ navigation }) {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://foolish-horse-74.loca.lt/data')
+        .get('https://hot-fly-13.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')
@@ -32,38 +28,17 @@ function HomeScreen({ navigation }) {
     }
     
     getInitalCards();
-      // USE WHEN ACCESSING ACTUAL API
-      // .get('https://api.pokemontcg.io/v2/cards', {
-      //   headers: {
-      //     'X-Api-Key': '45a5c559-fd20-46c2-93ab-2df8ba76466c'
-      //   }
-      // })
-      // setCards(data.data)
    
   }, []);
-
-  const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-    const color = item.id === selectedId ? 'white' : 'black';
-
-    return (
-      <Item
-        item={item}
-        onPress={() => {
-          setSelectedId(item.id);
-        }}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
-      />
-    );
-  };
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={cards}
-        renderItem={renderItem}
-        keyExtractor={item => item.id} />
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => 
+          <SingleCard item={item} selectedId={selectedId} setSelectedId={setSelectedId} />
+        } />
     </SafeAreaView>
   );
 };
@@ -72,15 +47,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: StatusBar.currentHeight || 0,
-    },
-    item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
+      backgroundColor: '#ffffff',
     },
   });
 
