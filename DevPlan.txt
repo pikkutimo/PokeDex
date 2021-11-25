@@ -39,3 +39,10 @@ ONGELMIA:
     => Ensin kortit
     - MUISTA! Axios ei vielä hae kuin yhden sivun korteista
 - Luo komponentti listassa näytettäville korteille
+
+22/11/2021
+
+- Luo DeckScreen
+    - edellyttää HomeScreenin listaukseen mahdollisuutta lisätä kortti pakkaan
+     ==> tulee olla tila, johon kortin voi tallentaa
+    - voi hyödyntää HomeScreenin listaa

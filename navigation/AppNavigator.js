@@ -24,7 +24,7 @@ const HomeTabs = () => {
       }}
       />
       <Tab.Screen 
-      name='Decks' 
+      name='Deck' 
       component={DeckScreen}
       options= {{
         tabBarIcon: ({ color, size }) => (

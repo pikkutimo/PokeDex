@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { addCard } from "../redux/deckSlice";
 import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
-// import { TapGestureHandler, State } from 'react-native-gesture-handler';
-// import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 
 const Item = ({ item, onPress, onLongPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} onLongPress={onLongPress} style={[styles.item, backgroundColor]}>
@@ -12,15 +10,16 @@ const Item = ({ item, onPress, onLongPress, backgroundColor, textColor }) => (
           <Text style={[styles.title, textColor]}>{item.name}</Text>
           <Text style={[styles.info, textColor]}>LEVEL: {item.level} HP: {item.hp}</Text>
         </View>
+        <Text style={styles.amount}>
+          {item.numberOfCards}
+        </Text>
     </TouchableOpacity>
   );
 
-const SingleCard = ({ item, selectedId, setSelectedId }) => {
-    const backgroundColor = item.id === selectedId ? "#b3a125" : "#ffde00";
-    const color = item.id === selectedId ? '#000000' : '#3b4cca';
+const DeckCard = ({ item, selectedDeckId, setSelectedDeckId }) => {
+    const backgroundColor = item.id === selectedDeckId ? "#b3a125" : "#ffde00";
+    const color = item.id === selectedDeckId ? '#000000' : '#3b4cca';
     const dispatch = useDispatch();
-    const deck = useSelector(state => state.deck.deckList);
-    const len = deck.length;
 
     return (
         <Fragment>
@@ -28,10 +27,10 @@ const SingleCard = ({ item, selectedId, setSelectedId }) => {
                 item={item}
                 onLongPress={() => {
                   dispatch(addCard(item))
-                  alert('Card added to deck!' + len)
+                  alert({len})
                 }}
                 onPress={() => {
-                  setSelectedId(item.id)
+                  setSelectedDeckId(item.id)
                 }}
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}
@@ -47,16 +46,24 @@ const styles = StyleSheet.create({
         width: 50,
         height: 70,
     },
+    amount: {
+      paddingLeft: 20,
+      color: '#3b4cca',
+      fontSize: 40,
+      fontFamily: 'Inter_900Black'
+    },
     title: {
-        paddingLeft: 20,
-        fontSize: 32,
-        fontFamily: 'Inter_900Black',
+      textAlign: "right",
+      paddingLeft: 20,
+      fontSize: 32,
+      fontFamily: 'Inter_900Black',
     },
     info: {
-        paddingLeft: 20,
-        fontSize: 20
+      paddingLeft: 20,
+      fontSize: 20
     },
     item: {
+      flex: 1,
       flexDirection: "row",
       borderTopRightRadius: 20,
       borderBottomLeftRadius: 20,
@@ -69,4 +76,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default SingleCard
+export default DeckCard

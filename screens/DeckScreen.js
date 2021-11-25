@@ -1,22 +1,42 @@
 import * as React from 'react';
-import {  Text, View, Button } from 'react-native';
+import { useSelector } from 'react-redux';
+import { StatusBar } from 'expo-status-bar';
+import DeckCard from '../components/DeckCard';
+import { SafeAreaView, FlatList, StyleSheet, Text } from 'react-native';
 
-const DeckScreen = ({ navigation, item }) => {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => navigation.push('Details')}
-        />
-        <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Button
-          title="Go back to first screen in stack"
-          onPress={() => navigation.popToTop()}
-        />
-      </View>
-    );
-  }
+const DeckScreen = ({ navigation }) => {
 
-  export default DeckScreen
+  const deck = useSelector(state => state.deck.deckList);
+  const [selectedDeckId, setSelectedDeckId] = React.useState(null);
+  
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={deck}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => 
+          <DeckCard item={item} selectedDeckId={selectedDeckId} setSelectedDeckId={setSelectedDeckId} />
+        } />
+    </SafeAreaView>
+  );
+
+  // <SafeAreaView style={styles.container}>
+  //     <FlatList
+  //       data={deck}
+  //       keyExtractor={(item, index) => index.toString()}
+  //       renderItem={({ item }) => 
+  //         <Text>{item.name} {item.numberOfCards}</Text>
+  //       } />
+  //   </SafeAreaView>
+  
+};
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0,
+      backgroundColor: '#ffffff',
+    },
+  });
+
+export default DeckScreen
