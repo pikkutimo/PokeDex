@@ -59,7 +59,9 @@ export const deckSlice = createSlice({
       
     },
     removeCard: (state, action) => {
-      state.deckList = state.deckList.filter((item, index) => index !== action.payload.index)
+      // state.deckList = state.deckList.filter((item, index) => index !== action.payload.index)
+      const updatedDeck = decrementAmount(state.deckList, action.payload.id)
+      state.deckList = [...updatedDeck]
     }
   }
 })

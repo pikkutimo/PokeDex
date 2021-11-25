@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
 import DeckCard from '../components/DeckCard';
-import { SafeAreaView, FlatList, StyleSheet, Text } from 'react-native';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
 
 const DeckScreen = ({ navigation }) => {
 
@@ -10,24 +10,15 @@ const DeckScreen = ({ navigation }) => {
   const [selectedDeckId, setSelectedDeckId] = React.useState(null);
   
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={deck}
         keyExtractor={item => item.id}
         renderItem={({ item }) => 
           <DeckCard item={item} selectedDeckId={selectedDeckId} setSelectedDeckId={setSelectedDeckId} />
         } />
-    </SafeAreaView>
+    </View>
   );
-
-  // <SafeAreaView style={styles.container}>
-  //     <FlatList
-  //       data={deck}
-  //       keyExtractor={(item, index) => index.toString()}
-  //       renderItem={({ item }) => 
-  //         <Text>{item.name} {item.numberOfCards}</Text>
-  //       } />
-  //   </SafeAreaView>
   
 };
 
