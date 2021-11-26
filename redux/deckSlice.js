@@ -26,19 +26,7 @@ const incrementAmount = (array , cardId) => {
 }
 
 const decrementAmount = (array, cardId) => {
-  const updatedCards = array.map(card => {
-    if (card.id !== cardId) {
-      return card
-    }
-
-    const updatedCard = card
-    updatedCard.numberOfCards -= 1
-    if (updatedCard.numberOfCards > 0) {
-      return updatedCard
-    }
-    
-  })
-
+  const updatedCards = array.filter(card => card.id !== cardId)
   return updatedCards
 }
 
@@ -60,7 +48,7 @@ export const deckSlice = createSlice({
     },
     removeCard: (state, action) => {
       // state.deckList = state.deckList.filter((item, index) => index !== action.payload.index)
-      const updatedDeck = decrementAmount(state.deckList, action.payload.id)
+      const updatedDeck = decrementAmount(state.deckList, action.payload)
       state.deckList = [...updatedDeck]
     }
   }

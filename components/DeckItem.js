@@ -1,65 +1,80 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { RectButton } from "react-native-gesture-handler";
 import { AntDesign } from '@expo/vector-icons';
 
-const RenderLeft = (progress, dragX) => {
-  const scale = dragX.interpolate({
-    inputRange: [0, 80],
-    outputRange: [0, 1],
-    extrapolate: 'clamp',
-  })
 
-  const Style = {
-    transform: [
-      { scale }
-    ]
-  }
-  return (
-    <RectButton>
-        <AntDesign style={styles.actionIcon} name="pluscircleo" size={32} color="black" />
-      </RectButton>
-  )
-}
 
-const RenderRight = (progress, dragX) => {
-  const scale = dragX.interpolate({
-    inputRange: [-80, 0],
-    outputRange: [1, 0],
-    extrapolate: 'clamp'
-  })
-
-  const Style = {
-    transform: [
-      { scale }
-    ]
-  }
-  return (
-    <RectButton>
-        <AntDesign style={styles.actionIcon} name="minuscircleo" size={32} color="black" />
-      </RectButton>
-  )
-}
-
-const DeckItem = ({ item, backgroundColor, textColor }) => (
-  <Swipeable
-    overshootRight={false}
-    renderRightActions={RenderRight}
-    overshootLeft={false}
-    renderLeftActions={RenderLeft}>
-    <View style={[styles.item, backgroundColor]}>
-        <Image style={styles.tinyPic} source={{uri: item.images.small}} />
-        <View>
-          <Text style={[styles.title, textColor]}>{item.name}</Text>
-          <Text style={[styles.info, textColor]}>LEVEL: {item.level} HP: {item.hp}</Text>
-        </View>
-        <Text style={styles.amount}>
-          {item.numberOfCards}
-        </Text>
-    </View>
-  </Swipeable>
-  );
+const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, incrementCard, decrementCard}) => {
+    const RenderLeft = ( progress, dragX ) => {
+        const scale = dragX.interpolate({
+          inputRange: [0, 80],
+          outputRange: [0, 1],
+          extrapolate: 'clamp',
+        });
+      
+        const Style = {
+          transform: [
+            { scale }
+          ]
+        }
+        return (
+              <View>
+                <AntDesign style={styles.actionIcon} name="pluscircleo" size={32} color="black" />
+              </View>
+        )
+      }
+      
+      const RenderRight = (progress, dragX) => {
+        const scale = dragX.interpolate({
+          inputRange: [-80, 0],
+          outputRange: [1, 0],
+          extrapolate: 'clamp'
+        })
+      
+        const Style = {
+          transform: [
+            { scale }
+          ]
+        }
+        return (
+         
+              <View>
+                <AntDesign style={styles.actionIcon} name="minuscircleo" size={32} color="black" />
+              </View>
+        )
+      }
+    
+    return (
+        <Swipeable
+            overshootRight={false}
+            renderRightActions={RenderRight}
+            onSwipeableLeftOpen={()=> {
+                incrementCard(item)
+            }}
+            overshootLeft={false}
+            renderLeftActions={RenderLeft}
+            onSwipeableRightOpen={() => {
+                decrementCard(item.id)
+            }}
+        >
+            <TouchableOpacity onPress={() => setSelectedDeckId(item.id)}>
+                <View style={[styles.item, backgroundColor]}>
+                    <Image style={styles.tinyPic} source={{uri: item.images.small}} />
+                    <View>
+                        <Text style={[styles.title, textColor]}>{item.name}</Text>
+                        <Text style={[styles.info, textColor]}>LEVEL: {item.level} HP: {item.hp}</Text>
+                </View>
+                <Text style={styles.amount}>
+                    {item.numberOfCards}
+                </Text>
+                </View>
+            </TouchableOpacity>
+            
+        </Swipeable>
+    )
+};
+    
 
   const styles = StyleSheet.create({
     actionIcon: {

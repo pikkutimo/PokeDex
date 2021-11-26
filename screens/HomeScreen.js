@@ -18,7 +18,7 @@ function HomeScreen({ navigation }) {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://witty-panther-14.loca.lt/data')
+        .get(' https://big-stingray-22.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')

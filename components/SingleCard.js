@@ -28,7 +28,7 @@ const SingleCard = ({ item, selectedId, setSelectedId }) => {
                 item={item}
                 onLongPress={() => {
                   dispatch(addCard(item))
-                  alert('Card added to deck!' + len)
+                  alert(`Card added to deck! ${item.id}`)
                 }}
                 onPress={() => {
                   setSelectedId(item.id)
