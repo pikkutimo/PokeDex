@@ -26,8 +26,15 @@ const incrementAmount = (array , cardId) => {
 }
 
 const decrementAmount = (array, cardId) => {
-  const updatedCards = array.filter(card => card.id !== cardId)
-  return updatedCards
+  const filteredCards = array.filter(card => card.id !== cardId)
+  const selectedCard = array.filter(card => card.id === cardId)
+
+  if (selectedCard[0].numberOfCards > 1) {
+    selectedCard[0].numberOfCards -= 1
+    return [...filteredCards, ...selectedCard]
+  }
+
+  return filteredCards
 }
 
 export const deckSlice = createSlice({
