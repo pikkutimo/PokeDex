@@ -4,15 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadCollection } from '../redux/collectionSlice';
 import SingleCard  from '../components/SingleCard';
 import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
-// import { useFonts, Inter_300Light } from '@expo-google-fonts/inter';
+import { addCard } from '../redux/deckSlice'
 import axios from 'axios';
 
 
-function HomeScreen({ navigation }) {
-  // const [cards, setCards] = React.useState([]);
+const HomeScreen = ({ navigation }) => {
+
   const cards = useSelector(state => state.collection.cardList);
-  const dispatch = useDispatch();
+  const deck = useSelector(state => state.deck.deckList);
   const [selectedId, setSelectedId] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const getInitalCards = async () => {
@@ -31,14 +32,25 @@ function HomeScreen({ navigation }) {
    
   }, []);
 
+  const incrementCard = (item) => {
+    dispatch(addCard(item));
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={cards}
         keyExtractor={item => item.id}
+        extraData={selectedId}
         renderItem={({ item }) => 
-          <SingleCard item={item} selectedId={selectedId} setSelectedId={setSelectedId} />
-        } />
+          <SingleCard
+            item={item}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+            swipeLeftFunction={incrementCard}
+            />
+        }
+        />
     </SafeAreaView>
   );
 };

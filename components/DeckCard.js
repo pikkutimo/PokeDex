@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import DeckItem from "./DeckItem";
 
 
-const DeckCard = ({ item, selectedDeckId, setSelectedDeckId, incrementCard, decrementCard}) => {
+const DeckCard = ({ item, selectedDeckId, setSelectedDeckId, swipeLeftFunction, swipeRightFunction}) => {
     const backgroundColor = item.id === selectedDeckId ? "#b3a125" : "#ffde00";
     const color = item.id === selectedDeckId ? '#000000' : '#3b4cca';
 
@@ -13,8 +13,8 @@ const DeckCard = ({ item, selectedDeckId, setSelectedDeckId, incrementCard, decr
                 backgroundColor={{ backgroundColor }}
                 textColor={{ color }}
                 setSelectedDeckId={setSelectedDeckId}
-                incrementCard={incrementCard}
-                decrementCard={decrementCard}
+                swipeLeftFunction={swipeLeftFunction}
+                swipeRightFunction={swipeRightFunction}
             />
         </Fragment>
       

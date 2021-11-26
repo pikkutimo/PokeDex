@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, incrementCard, decrementCard}) => {
+const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLeftFunction, swipeRightFunction}) => {
     const RenderLeft = ( progress, dragX ) => {
         const scale = dragX.interpolate({
           inputRange: [0, 80],
@@ -50,12 +50,12 @@ const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, increme
             overshootRight={false}
             renderRightActions={RenderRight}
             onSwipeableLeftOpen={()=> {
-                incrementCard(item)
+                swipeLeftFunction(item)
             }}
             overshootLeft={false}
             renderLeftActions={RenderLeft}
             onSwipeableRightOpen={() => {
-                decrementCard(item.id)
+                swipeRightFunction(item.id)
             }}
         >
             <TouchableOpacity onPress={() => setSelectedDeckId(item.id)}>

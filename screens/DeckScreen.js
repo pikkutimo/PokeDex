@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
+import { useSelector, useDispatch } from 'react-redux';
 import DeckCard from '../components/DeckCard';
 import { View, FlatList, StyleSheet, Text } from 'react-native';
 import { addCard, removeCard} from '../redux/deckSlice'
@@ -31,8 +31,8 @@ const DeckScreen = ({ navigation }) => {
             item={item}
             selectedDeckId={selectedDeckId}
             setSelectedDeckId={setSelectedDeckId}
-            decrementCard={decrementCard}
-            incrementCard={incrementCard}
+            swipeLeftFunction={incrementCard}
+            swipeRightFunction={decrementCard}
             />
           )
         }}
