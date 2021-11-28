@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
 import SingleItem from "./SingleItem";
 const SingleCard = ({ item, selectedId, setSelectedId, swipeLeftFunction, rowRefs }) => {
     const backgroundColor = item.id === selectedId ? "#b3a125" : "#ffde00";
-    const color = item.id === selectedId ? '#000000' : '#3b4cca';
+    const color = item.id === selectedId ? '#cc0000' : '#3b4cca';
 
     return (
         <Fragment>
