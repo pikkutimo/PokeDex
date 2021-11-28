@@ -14,12 +14,13 @@ const HomeScreen = ({ navigation }) => {
   const deck = useSelector(state => state.deck.deckList);
   const [selectedId, setSelectedId] = React.useState(null);
   const dispatch = useDispatch();
+  let rowRefs = new Map();
 
   React.useEffect(() => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get(' https://big-stingray-22.loca.lt/data')
+        .get('https://sharp-liger-28.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')
@@ -48,6 +49,7 @@ const HomeScreen = ({ navigation }) => {
             selectedId={selectedId}
             setSelectedId={setSelectedId}
             swipeLeftFunction={incrementCard}
+            rowRefs={rowRefs}
             />
         }
         />

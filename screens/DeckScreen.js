@@ -10,6 +10,7 @@ const DeckScreen = ({ navigation }) => {
   const deck = useSelector(state => state.deck.deckList);
   const [selectedDeckId, setSelectedDeckId] = React.useState(null);
   const dispatch = useDispatch();
+  let rowRefs = new Map();
 
   const decrementCard = (item) => {
     dispatch(removeCard(item));
@@ -33,6 +34,7 @@ const DeckScreen = ({ navigation }) => {
             setSelectedDeckId={setSelectedDeckId}
             swipeLeftFunction={incrementCard}
             swipeRightFunction={decrementCard}
+            rowRefs={rowRefs}
             />
           )
         }}

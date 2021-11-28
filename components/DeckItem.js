@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLeftFunction, swipeRightFunction}) => {
+const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLeftFunction, swipeRightFunction, rowRefs}) => {
     const RenderLeft = ( progress, dragX ) => {
         const scale = dragX.interpolate({
           inputRange: [0, 80],
@@ -47,6 +47,17 @@ const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLe
     
     return (
         <Swipeable
+            key={item.id}
+            ref={ref => {
+                if (ref && !rowRefs.get(item.id)) {
+                rowRefs.set(item.id, ref);
+            }
+            }}
+            onSwipeableWillOpen={()=>{
+                [...rowRefs.entries()].forEach(([key, ref]) => {
+                    if (key !== item.id && ref) ref.close();
+                });
+            }}
             overshootRight={false}
             renderRightActions={RenderRight}
             onSwipeableLeftOpen={()=> {
