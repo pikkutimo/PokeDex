@@ -5,9 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 
 
-const SingleItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLeftFunction, rowRefs }) => {
-
-  let row = [];
+const SingleItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLeftFunction, rowRefs, navigation }) => {
 
   const RenderLeft = ( progress, dragX ) => {
     const scale = dragX.interpolate({
@@ -42,7 +40,7 @@ const SingleItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipe
         swipeLeftFunction(item)
       }}
     >
-      <TouchableOpacity onPress={() => setSelectedDeckId(item.id)}>
+      <TouchableOpacity onPress={() => setSelectedDeckId(item.id)} onLongPress={() => navigation.navigate('CardScreen', {itemId: item.id, itemName: item.name})}>
         <View style={[styles.item, backgroundColor]}>
           <Image style={styles.tinyPic} source={{uri: item.images.small}} />
             <View>

@@ -1,22 +1,34 @@
 import * as React from 'react';
-import {  Text, View, Button } from 'react-native';
+import {  Text, View, Button, Image, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const CardScreen = ({ navigation, item }) => {
+
+const CardScreen = ({ route, navigation }) => {
+
+    const {itemId} = route.params;
+    const cards = useSelector(state => state.collection.cardList);
+    const card = cards.find(item => item.id === itemId)
+
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => navigation.push('Details')}
-        />
-        <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Button
-          title="Go back to first screen in stack"
-          onPress={() => navigation.popToTop()}
-        />
+      <View style={styles.ImageContainer}>
+        <Image style={styles.Image} source={{uri: card.images.large}} />
       </View>
     );
   }
+
+  const styles = StyleSheet.create({
+    Image: {
+      resizeMode: 'contain',
+      height: "100%",
+      width: "100%", // 100% of the image container which is 90% of screen.
+      alignSelf: 'center',
+      resizeMode: 'contain'
+   },
+   ImageContainer: {
+      width: '100%',
+      alignSelf: 'center',
+      justifyContent: 'center'
+   }
+  });
 
   export default CardScreen

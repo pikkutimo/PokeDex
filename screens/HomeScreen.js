@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://sharp-liger-28.loca.lt/data')
+        .get('https://chilly-cow-99.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')
@@ -50,6 +50,7 @@ const HomeScreen = ({ navigation }) => {
             setSelectedId={setSelectedId}
             swipeLeftFunction={incrementCard}
             rowRefs={rowRefs}
+            navigation={navigation}
             />
         }
         />

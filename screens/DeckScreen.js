@@ -35,6 +35,7 @@ const DeckScreen = ({ navigation }) => {
             swipeLeftFunction={incrementCard}
             swipeRightFunction={decrementCard}
             rowRefs={rowRefs}
+            navigation={navigation}
             />
           )
         }}
