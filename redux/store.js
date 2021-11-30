@@ -6,5 +6,9 @@ export default configureStore({
   reducer: {
       collection: loadCollection,
       deck: addCard,
-  }
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+  })
 })

@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCollection } from '../redux/collectionSlice';
 import SingleCard  from '../components/SingleCard';
-import { SafeAreaView, FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text } from 'react-native';
 import { addCard } from '../redux/deckSlice'
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ const HomeScreen = ({ navigation }) => {
   const cards = useSelector(state => state.collection.cardList);
   const deck = useSelector(state => state.deck.deckList);
   const [selectedId, setSelectedId] = React.useState(null);
+  const [loaded, setLoaded] = React.useState(false);
   const dispatch = useDispatch();
   let rowRefs = new Map();
 
@@ -20,10 +21,11 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://api.pokemontcg.io/v2/cards/')
+        .get('https://api.pokemontcg.io/v2/cards?page=1&pageSize=250')
         // https://api.pokemontcg.io/v2/cards?page=1&pageSize=250
-        dispatch(loadCollection(data))
         console.log('Cards fetched')
+        dispatch(loadCollection(data.data))
+        setLoaded(true)
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +41,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      {loaded 
+        ? <FlatList
         data={cards}
         keyExtractor={item => item.id}
         extraData={selectedId}
@@ -54,6 +57,9 @@ const HomeScreen = ({ navigation }) => {
             />
         }
         />
+        : <Text>Loading...</Text>
+      }
+      
     </SafeAreaView>
   );
 };
