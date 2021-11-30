@@ -20,8 +20,8 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://chilly-cow-99.loca.lt/data')
-
+        .get('https://api.pokemontcg.io/v2/cards/')
+        // https://api.pokemontcg.io/v2/cards?page=1&pageSize=250
         dispatch(loadCollection(data))
         console.log('Cards fetched')
       } catch (error) {
