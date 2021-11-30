@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://chilly-cow-99.loca.lt/data')
+        .get('https://spicy-rabbit-86.loca.lt/data')
 
         dispatch(loadCollection(data))
         console.log('Cards fetched')
