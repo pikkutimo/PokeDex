@@ -91,7 +91,7 @@ const DeckItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipeLe
     actionIcon: {
       alignItems: 'center',
       paddingTop: 30,
-      width: 50,
+      width: 35,
       marginHorizontal: 10
     },
     tinyPic: {

@@ -21,10 +21,10 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://api.pokemontcg.io/v2/cards?page=1&pageSize=250')
+        .get('https://quick-firefox-25.loca.lt/data')
         // https://api.pokemontcg.io/v2/cards?page=1&pageSize=250
         console.log('Cards fetched')
-        dispatch(loadCollection(data.data))
+        dispatch(loadCollection(data))
         setLoaded(true)
       } catch (error) {
         console.log(error);
