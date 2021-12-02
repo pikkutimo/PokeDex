@@ -60,24 +60,26 @@ const SingleItem = ({ item, backgroundColor, textColor, setSelectedDeckId, swipe
 const styles = StyleSheet.create({
   actionIcon: {
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 30,
     width: 50,
     marginHorizontal: 10
   },
   tinyPic: {
-    width: 50,
-    height: 70,
+      width: 50,
+      height: 70,
   },
   amount: {
+    flex:2,
+    textAlign: 'center',
     paddingLeft: 20,
     color: '#3b4cca',
     fontSize: 40,
     fontFamily: 'Inter_900Black'
   },
   title: {
-    textAlign: "right",
+    textAlign: "left",
     paddingLeft: 20,
-    fontSize: 32,
+    fontSize: 24,
     fontFamily: 'Inter_900Black',
   },
   info: {
@@ -87,14 +89,14 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     flexDirection: "row",
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
+    borderTopRightRadius: 25,
+    borderBottomLeftRadius: 25,
     borderColor: '#3b4cca',
     borderWidth: 5,
     backgroundColor: '#ffdd00',
-    padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    padding: 5,
+    marginVertical: 5,
+    marginHorizontal: 5,
   },
 });
 
