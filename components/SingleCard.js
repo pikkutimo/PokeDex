@@ -1,7 +1,4 @@
 import React, { Fragment } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { addCard } from "../redux/deckSlice";
-import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
 import SingleItem from "./SingleItem";
 const SingleCard = ({ item, selectedId, setSelectedId, swipeLeftFunction, rowRefs, navigation }) => {
     const backgroundColor = item.id === selectedId ? "#b3a125" : "#ffde00";
