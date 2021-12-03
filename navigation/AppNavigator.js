@@ -7,13 +7,14 @@ import HomeScreen from '../screens/HomeScreen';
 import CardScreen from '../screens/CardScreen';
 import DeckScreen from '../screens/DeckScreen';
 import AboutScreen from '../screens/AboutScreen';
+import PokeHeader from '../components/PokeHeader';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const HomeTabs = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{headerShown: false,}}>
       <Tab.Screen 
       name='Pokemons'
       component={HomeScreen} 
@@ -48,8 +49,14 @@ const HomeTabs = () => {
 const MainStackNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false,}}>
-          <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Navigator options={{ headerTitle: (props) => <PokeHeader {...props} /> }}>
+          <Stack.Screen
+          name="Home"
+          component={HomeTabs}
+          options={{ 
+            headerTitle: (props) => <PokeHeader {...props} />,
+          }}
+          />
           <Stack.Screen name="CardScreen" component={CardScreen} />
       </Stack.Navigator>
     </NavigationContainer>   
