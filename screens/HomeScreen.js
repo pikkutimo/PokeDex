@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
     const getInitalCards = async () => {
       try {
         const { data } = await axios
-        .get('https://dry-mole-22.loca.lt/data')
+        .get('https://curly-penguin-2.loca.lt/data')
         // https://api.pokemontcg.io/v2/cards?page=1&pageSize=250
         console.log('Cards fetched')
         dispatch(loadCollection(data))

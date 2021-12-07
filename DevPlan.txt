@@ -46,3 +46,7 @@ ONGELMIA:
     - edellyttää HomeScreenin listaukseen mahdollisuutta lisätä kortti pakkaan
      ==> tulee olla tila, johon kortin voi tallentaa
     - voi hyödyntää HomeScreenin listaa
+
+3/12/2021 Custom Header for stacknavigator
+
+- by https://www.flaticon.com/authors/nikita-golubev
