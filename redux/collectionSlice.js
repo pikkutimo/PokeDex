@@ -7,7 +7,7 @@ export const collectionSlice = createSlice({
   },
   reducers: {
     loadCollection: (state, action) => {
-      state.cardList = action.payload
+      state.cardList = [...state.cardList, ...action.payload]
     }
   }
 })

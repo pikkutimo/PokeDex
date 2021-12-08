@@ -46,3 +46,7 @@ ONGELMIA:
     - edellyttää HomeScreenin listaukseen mahdollisuutta lisätä kortti pakkaan
      ==> tulee olla tila, johon kortin voi tallentaa
     - voi hyödyntää HomeScreenin listaa
+
+8/12/2021
+
+- Miten esittää kortit? yli 14000 korttia?
