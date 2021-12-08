@@ -50,3 +50,6 @@ ONGELMIA:
 3/12/2021 Custom Header for stacknavigator
 
 - by https://www.flaticon.com/authors/nikita-golubev
+8/12/2021
+
+- Miten esittää kortit? yli 14000 korttia?
