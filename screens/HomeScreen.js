@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCollection } from '../redux/collectionSlice';
 import SingleCard  from '../components/SingleCard';
-import { SafeAreaView, FlatList, StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { addCard } from '../redux/deckSlice'
 import axios from 'axios';
 
@@ -11,10 +11,11 @@ import axios from 'axios';
 const HomeScreen = ({ navigation }) => {
 
   const cards = useSelector(state => state.collection.cardList);
-  const deck = useSelector(state => state.deck.deckList);
   const [selectedId, setSelectedId] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(1);
+  const [textFilter, setTextFilter] = React.useState('');
+
   const dispatch = useDispatch();
   let rowRefs = new Map();
 
@@ -34,15 +35,45 @@ const HomeScreen = ({ navigation }) => {
     }
   }
 
-
   const incrementCard = (item) => {
     dispatch(addCard(item));
   }
 
-  const renderFooter = () => {
+  const filteredData = textFilter 
+    ? cards.filter(item => {
+      const itemName = item.name.toLowerCase()
+      const filterName = textFilter.toLowerCase()
+      return itemName.indexOf(filterName) > -1
+    })
+    : cards;
+
+
+
+  const FlatListHeader = () => {
+    return (
+      <View
+        style={{
+          backgroundColor: '#fff',
+          padding: 10,
+          marginVertical: 10,
+          borderRadius: 20
+        }}
+      >
+        <TextInput
+          onChangeText={textFilter => setTextFilter(textFilter)}
+          value={textFilter}
+          placeholder="Search"
+          style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+        />
+      </View>
+    );
+  }
+
+  const FlatListFooter = () => {
     return (
       //Footer View with Load More button
       <View style={styles.footer}>
+        {textFilter ? (
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={getData}
@@ -54,7 +85,8 @@ const HomeScreen = ({ navigation }) => {
               color="white"
               style={{marginLeft: 8}} />
           ) : null}
-        </TouchableOpacity>
+        </TouchableOpacity>)
+        : null}
       </View>
     );
   };
@@ -62,7 +94,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={cards}
+        ListHeaderComponent={FlatListHeader}
+        data={filteredData}
         keyExtractor={item => item.id}
         extraData={selectedId}
         renderItem={({ item }) => 
@@ -75,7 +108,7 @@ const HomeScreen = ({ navigation }) => {
             navigation={navigation}
             />
           }
-          ListFooterComponent={renderFooter}
+          ListFooterComponent={FlatListFooter}
         />    
     </SafeAreaView>
   )
