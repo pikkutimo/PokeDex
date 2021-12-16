@@ -5,6 +5,7 @@ import { loadCollection } from '../redux/collectionSlice';
 import SingleCard  from '../components/SingleCard';
 import { SafeAreaView, FlatList, StyleSheet, View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { addCard } from '../redux/deckSlice'
+import {Picker} from '@react-native-picker/picker';
 import axios from 'axios';
 
 
@@ -15,6 +16,7 @@ const HomeScreen = ({ navigation }) => {
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const [textFilter, setTextFilter] = React.useState('');
+  const [selectedLanguage, setSelectedLanguage] = React.useState();
 
   const dispatch = useDispatch();
   let rowRefs = new Map();
@@ -59,12 +61,29 @@ const HomeScreen = ({ navigation }) => {
           borderRadius: 20
         }}
       >
-        <TextInput
+        <Picker
+        selectedValue={selectedLanguage}
+        onValueChange={(itemValue, itemIndex) =>
+          setSelectedLanguage(itemValue)
+        }>
+          <Picker.Item label="Lightning" value="lightning" />
+          <Picker.Item label="Fire" value="fire" />
+          <Picker.Item label="Water" value="water" />
+          <Picker.Item label="Grass" value="grass" />
+          <Picker.Item label="Fighting" value="fighting" />
+          <Picker.Item label="Psychic" value="psychic" />
+          <Picker.Item label="Colorless" value="colorless" />
+          <Picker.Item label="Darkness" value="darkness" />
+          <Picker.Item label="Metal" value="metal" />
+          <Picker.Item label="Dragon" value="dragon" />
+          <Picker.Item label="Fairy" value="fairy" />
+        </Picker>
+        {/* <TextInput
           onChangeText={textFilter => setTextFilter(textFilter)}
           value={textFilter}
           placeholder="Search"
           style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
-        />
+        /> */}
       </View>
     );
   }
